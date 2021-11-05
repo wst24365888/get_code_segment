@@ -1,7 +1,7 @@
 #include <linux/kernel.h>
 #include <linux/string.h>
 #include <linux/uaccess.h>
-#include <linux/init_task.h>
+#include <linux/sched.h>
 #include <errno.h>
 
 struct code_segment

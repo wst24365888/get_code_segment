@@ -45,9 +45,7 @@ confirm
 vim ~/linux-5.14.9/arch/x86/entry/syscalls/syscall_64.tbl
 echo 'Info of new syscall should have been added.'
 confirm
-## append followings:
-## struct code_segment;
-## asmlinkage long sys_get_code_segment(pid_t current_pid, void *__user user_code_segment, void (*callback)(struct code_segment*));
+## append asmlinkage long sys_get_code_segment(pid_t current_pid, void *__user user_code_segment);
 vim ~/linux-5.14.9/include/linux/syscalls.h
 echo 'Header of new syscall should have been appended.'
 confirm

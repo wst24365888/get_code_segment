@@ -2,7 +2,8 @@
 #include <linux/string.h>
 #include <linux/uaccess.h>
 #include <linux/sched.h>
-#include <errno.h>
+#include <linux/syscalls.h>
+#include <asm/errno.h>
 
 struct code_segment
 {
@@ -10,7 +11,7 @@ struct code_segment
     unsigned long end_code;
 };
 
-asmlinkage long sys_get_code_segment(pid_t current_pid, void *__user user_code_segment, void (*callback)(struct code_segment*))
+SYSCALL_DEFINE2(get_code_segment, pid_t, current_pid, void *__user, user_code_segment)
 {
     struct task_struct *task;
     struct code_segment code_segment;
@@ -31,11 +32,6 @@ asmlinkage long sys_get_code_segment(pid_t current_pid, void *__user user_code_s
     if (copy_to_user(user_code_segment, &code_segment, sizeof(code_segment)))
     {
         return -EFAULT;
-    }
-
-    if (callback)
-    {
-        callback(&code_segment);
     }
 
     return 0;

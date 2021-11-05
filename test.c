@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define SYS_GET_CODE_SEGMENT 448
+#define __NR_get_code_segment 448
 
 struct code_segment
 {
@@ -16,7 +16,7 @@ int main()
 {
     struct code_segment my_code_segment;
 
-    int a = syscall(SYS_GET_CODE_SEGMENT, getpid(), (void *)&my_code_segment);
+    long result = syscall(__NR_get_code_segment, getpid(), (void *)&my_code_segment);
 
     printf("Start: %lx\nEnd: %lx\n", my_code_segment.start_code, my_code_segment.end_code);
 
